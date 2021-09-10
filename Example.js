@@ -14,7 +14,7 @@ const onClickButton = () => {  // Нажимаем add
         text: valueInput,
         isCheck: false,
     })
-    localStorage.setItem('tasks', JSON.stringify(allTasks));
+    localStorage.setItem('tasks', JSON.stringify(allTasks)); 
     console.log(allTasks)
     valueInput = '';   // Обнуление
     input.value = '';   // Обнуление
@@ -92,7 +92,7 @@ const onChangeCheckbox = (index) => {     // Передаём ID именно Э
     localStorage.setItem('tasks', JSON.stringify(allTasks));
     render()    
 }
-const entrance = document.createElement('input');
+const entrance = document.createElement('input'); // абобабабаба
 const onClickImageEdit = () => {
     entrance.value = item.text;
     allTasks.replaceChild(entrance, text);
