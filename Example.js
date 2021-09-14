@@ -5,11 +5,11 @@ let input = null;
 window.onload = function init() {
     input = document.getElementById('add-task');    // Ищем Input в документе, доступен всё время
     input.addEventListener('change', updateValue);  // Слушатель срабатывает при ИЗМЕНЕНИЯХ
-    const resp = await fetch('http://localhost:8000/allTasks', {
-        method: 'GET'
-    });
-    let result = await resp.json();
-    console.log(result);
+    // const resp = await fetch('http://localhost:8000/allTasks', {
+    //     method: 'GET'
+    // });
+    // let result = await resp.json();
+    // console.log(result);
     render();
 }
 
