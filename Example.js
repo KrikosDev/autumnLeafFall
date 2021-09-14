@@ -2,25 +2,38 @@ let allTasks = JSON.parse(localStorage.getItem('tasks')) || []; // Хранят�
 let valueInput = '';
 let input = null;
 
-window.onload = function init() {
+window.onload = async function init() {
     input = document.getElementById('add-task');    // Ищем Input в документе, доступен всё время
     input.addEventListener('change', updateValue);  // Слушатель срабатывает при ИЗМЕНЕНИЯХ
-    // const resp = await fetch('http://localhost:8000/allTasks', {
-    //     method: 'GET'
-    // });
-    // let result = await resp.json();
-    // console.log(result);
+    const resp = await fetch('http://localhost:8000/allTasks', {
+        method: 'GET'
+    });
+    let result = await resp.json();
+    allTasks = result.data;
     render();
 }
 
-const onClickButton = () => {  // Нажимаем add  
+const onClickButton = async() => {  // Нажимаем add  
     if (valueInput !== '') {
     allTasks.push({
         text: valueInput,
         isCheck: false,
-    })
+    });
+    const resp = await fetch('http://localhost:8000/createTask', {
+        method: 'Post',
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({
+            text: valueInput,
+            isCheck: false
+        })
+    });
+    let result = await resp.json();
+    allTasks = result.data; 
     localStorage.setItem('tasks', JSON.stringify(allTasks)); 
-    console.log(allTasks)
+    // console.log(allTasks)
     valueInput = '';   // Обнуление
     input.value = '';   // Обнуление
     render();           // Добавляет таски на страницу
